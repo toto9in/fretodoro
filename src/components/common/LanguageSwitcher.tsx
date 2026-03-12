@@ -1,17 +1,31 @@
 import { useTranslation } from 'react-i18next';
 import { changeLanguage } from '../../i18n/config';
 
+const LANGUAGES = [
+  { code: 'pt-BR', label: 'PT-BR' },
+  { code: 'en', label: 'EN' },
+];
+
 export function LanguageSwitcher() {
   const { i18n } = useTranslation();
 
   return (
-    <select
-      className="select select-bordered select-sm ml-4"
-      value={i18n.language}
-      onChange={(e) => changeLanguage(e.target.value)}
-    >
-      <option value="pt-BR">PT-BR</option>
-      <option value="en">EN</option>
-    </select>
+    <details className="dropdown dropdown-end">
+      <summary className="btn btn-ghost btn-sm btn-square" title="Language / Idioma">
+        ⚙
+      </summary>
+      <ul className="menu dropdown-content bg-base-200 rounded-box z-10 w-28 p-1 shadow-sm">
+        {LANGUAGES.map(({ code, label }) => (
+          <li key={code}>
+            <button
+              className={i18n.language === code ? 'menu-active' : ''}
+              onClick={() => changeLanguage(code)}
+            >
+              {label}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </details>
   );
 }
