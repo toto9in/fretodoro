@@ -1,0 +1,61 @@
+{
+  "app": {
+    "title": "Fretodoro",
+    "subtitle": "Cronograma Semanal de Estudos",
+    "startTodayPractice": "Iniciar Treino de Hoje"
+  },
+  "errors": {
+    "loadFailed": "Erro ao carregar dados",
+    "tryAgain": "Tentar novamente"
+  },
+  "days": {
+    "Monday": "Segunda-feira",
+    "Tuesday": "Terça-feira",
+    "Wednesday": "Quarta-feira",
+    "Thursday": "Quinta-feira",
+    "Friday": "Sexta-feira",
+    "Saturday": "Sábado",
+    "Sunday": "Domingo"
+  },
+  "dayCard": {
+    "more": "Mais",
+    "startDay": "Começar o dia",
+    "newActivity": "Nova Atividade",
+    "newActivityPlaceholder": "Digite e pressione Enter",
+    "estimatedTime": "Tempo estimado",
+    "min": "min",
+    "rest": "Descanso",
+    "dropHere": "Solte aqui"
+  },
+  "scheduleBoard": {
+    "addActivity": "Adicionar atividade",
+    "activityRemoved": "{{title}} removido de {{day}}",
+    "undo": "Desfazer"
+  },
+  "practiceRoom": {
+    "back": "Voltar",
+    "settings": "Configurações",
+    "pause": "Pausar",
+    "resume": "Continuar",
+    "finishPractice": "Finalizar Treino",
+    "practiceFinished": "Treino Concluído!",
+    "noActivities": "Nenhuma atividade agendada para hoje.",
+    "allCompleted": "Todas as atividades de hoje foram concluídas!",
+    "returnHome": "Voltar ao Início"
+  },
+  "timerPanel": {
+    "focus": "Foco",
+    "break": "Pausa",
+    "finishEarly": "Terminar"
+  },
+  "metronome": {
+    "title": "Metrônomo",
+    "bpm": "BPM"
+  },
+  "queueSidebar": {
+    "title": "Fila de Atividades",
+    "completed": "Concluído",
+    "upNext": "Próximas",
+    "min": "min"
+  }
+}

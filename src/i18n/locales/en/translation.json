@@ -1,0 +1,61 @@
+{
+  "app": {
+    "title": "Fretodoro",
+    "subtitle": "Weekly Study Schedule",
+    "startTodayPractice": "Start Today's Practice"
+  },
+  "errors": {
+    "loadFailed": "Failed to load data",
+    "tryAgain": "Try again"
+  },
+  "days": {
+    "Monday": "Monday",
+    "Tuesday": "Tuesday",
+    "Wednesday": "Wednesday",
+    "Thursday": "Thursday",
+    "Friday": "Friday",
+    "Saturday": "Saturday",
+    "Sunday": "Sunday"
+  },
+  "dayCard": {
+    "more": "More",
+    "startDay": "Start day",
+    "newActivity": "New Activity",
+    "newActivityPlaceholder": "Type and press Enter",
+    "estimatedTime": "Estimated time",
+    "min": "min",
+    "rest": "Rest",
+    "dropHere": "Drop here"
+  },
+  "scheduleBoard": {
+    "addActivity": "Add Activity",
+    "activityRemoved": "{{title}} removed from {{day}}",
+    "undo": "Undo"
+  },
+  "practiceRoom": {
+    "back": "Back",
+    "settings": "Settings",
+    "pause": "Pause",
+    "resume": "Resume",
+    "finishPractice": "Finish Practice",
+    "practiceFinished": "Practice Finished!",
+    "noActivities": "No activities scheduled for today.",
+    "allCompleted": "All activities for today are completed!",
+    "returnHome": "Return Home"
+  },
+  "timerPanel": {
+    "focus": "Focus",
+    "break": "Break",
+    "finishEarly": "Finish Early"
+  },
+  "metronome": {
+    "title": "Metronome",
+    "bpm": "BPM"
+  },
+  "queueSidebar": {
+    "title": "Activity Queue",
+    "completed": "Completed",
+    "upNext": "Up Next",
+    "min": "min"
+  }
+}
