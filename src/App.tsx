@@ -54,15 +54,14 @@ function App() {
 
   return (
     <div className="min-h-screen bg-base-200 p-6 lg:p-8 flex flex-col h-screen">
-      <header className="mb-8 flex justify-between items-end shrink-0">
-        <div className="flex gap-4 items-center">
-          <div>
-            <h1 className="text-3xl font-bold text-base-content tracking-tight">{t('app.title')}</h1>
-            <p className="text-base-content/50 mt-1 font-medium text-sm">{t('app.subtitle')}</p>
-          </div>
-          <LanguageSwitcher />
+      <header className="mb-8 flex justify-between items-center shrink-0">
+        <div>
+          <h1 className="text-3xl font-bold text-base-content tracking-tight">{t('app.title')}</h1>
+          <p className="text-base-content/50 mt-1 font-medium text-sm">{t('app.subtitle')}</p>
         </div>
-        <button
+        <div className="flex gap-2 items-center">
+          <LanguageSwitcher />
+          <button
           onClick={() => setIsPracticing(true)}
           className="btn btn-primary gap-2"
         >
@@ -71,6 +70,7 @@ function App() {
             <polygon points="5 3 19 12 5 21 5 3" />
           </svg>
         </button>
+        </div>
       </header>
 
       <main className="flex-1 overflow-x-auto pb-4">
