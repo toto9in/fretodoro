@@ -6,6 +6,7 @@ import { Block } from '../../types';
 import { TimerPanel } from './TimerPanel';
 import { MetronomePanel } from './MetronomePanel';
 import { QueueSidebar } from './QueueSidebar';
+import { ArrowLeft } from 'lucide-react';
 
 interface PracticeRoomProps {
   onBack: () => void;
@@ -84,9 +85,7 @@ export const PracticeRoom = ({ onBack }: PracticeRoomProps) => {
       {/* Top Nav */}
       <div className="mb-4 flex items-center justify-between shrink-0">
         <button onClick={onBack} className="btn btn-ghost btn-sm gap-1 text-base-content/60">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M19 12H5" /><polyline points="12 19 5 12 12 5" />
-          </svg>
+          <ArrowLeft size={16} />
           {t('practiceRoom.back')}
         </button>
         <span className="text-sm text-base-content/40 font-medium">

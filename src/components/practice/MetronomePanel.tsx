@@ -1,6 +1,7 @@
 import React from 'react';
 import { useMetronome } from '../../hooks/useMetronome';
 import { useTranslation } from 'react-i18next';
+import { Volume2, Pause, Play, Minus, Plus } from 'lucide-react';
 
 export const MetronomePanel = React.memo(function MetronomePanel() {
   const { t } = useTranslation();
@@ -10,11 +11,7 @@ export const MetronomePanel = React.memo(function MetronomePanel() {
     <div className="bg-base-100 border border-base-300 rounded-md shadow-sm overflow-hidden shrink-0">
       <div className="px-4 py-2.5 border-b border-base-300 bg-base-200">
         <h3 className="font-bold text-base-content text-sm flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-          </svg>
+          <Volume2 size={13} />
           {t('metronome.title')}
         </h3>
       </div>
@@ -38,13 +35,9 @@ export const MetronomePanel = React.memo(function MetronomePanel() {
             className={`btn btn-circle btn-md ${metronome.isPlaying ? 'btn-warning' : 'btn-primary'}`}
           >
             {metronome.isPlaying ? (
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <rect x="6" y="4" width="4" height="16" /><rect x="14" y="4" width="4" height="16" />
-              </svg>
+              <Pause size={18} fill="currentColor" />
             ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="5 3 19 12 5 21 5 3" />
-              </svg>
+              <Play size={18} fill="currentColor" />
             )}
           </button>
         </div>
@@ -53,7 +46,7 @@ export const MetronomePanel = React.memo(function MetronomePanel() {
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-2">
             <button onClick={() => metronome.setBpm(metronome.bpm - 5)} className="btn btn-xs btn-ghost btn-square" title="-5">
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"><path d="M5 12h14" /></svg>
+              <Minus size={12} />
             </button>
             <button onClick={() => metronome.setBpm(metronome.bpm - 1)} className="btn btn-xs btn-ghost btn-square text-[10px] font-bold">-1</button>
             <div className="text-center flex-1">
@@ -62,7 +55,7 @@ export const MetronomePanel = React.memo(function MetronomePanel() {
             </div>
             <button onClick={() => metronome.setBpm(metronome.bpm + 1)} className="btn btn-xs btn-ghost btn-square text-[10px] font-bold">+1</button>
             <button onClick={() => metronome.setBpm(metronome.bpm + 5)} className="btn btn-xs btn-ghost btn-square" title="+5">
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"><path d="M12 5v14M5 12h14" /></svg>
+              <Plus size={12} />
             </button>
           </div>
 

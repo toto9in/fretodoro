@@ -9,6 +9,7 @@ import {
 import { useDroppable } from '@dnd-kit/core';
 import { SortableBlockItem } from './SortableBlockItem';
 import { AddBlockModal, AddBlockModalHandle } from './AddBlockModal';
+import { Clock3, Plus } from 'lucide-react';
 
 interface DayCardProps {
   day: DayOfWeek;
@@ -44,9 +45,7 @@ export const DayCard = React.memo(({ day, blocks, activeBlockId }: DayCardProps)
             <h3 className="font-bold text-base-content text-base">{t(`days.${day}`)}</h3>
             {totalMinutes > 0
               ? <span className="inline-flex items-center gap-1 text-primary text-sm font-bold mt-0.5">
-                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="block shrink-0">
-                  <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
-                </svg>
+                <Clock3 size={13} className="block shrink-0" />
                 {totalMinutes} {t('dayCard.min')}
               </span>
               : <span className="inline-flex items-center text-xs text-base-content/30 mt-0.5 h-[16px]">—</span>
@@ -57,9 +56,7 @@ export const DayCard = React.memo(({ day, blocks, activeBlockId }: DayCardProps)
             className="btn btn-primary btn-sm btn-square rounded-md"
             title="Adicionar Bloco"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 5v14M5 12h14" />
-            </svg>
+            <Plus size={16} />
           </button>
         </div>
 

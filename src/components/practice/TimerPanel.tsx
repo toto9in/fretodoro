@@ -2,6 +2,7 @@ import React from 'react';
 import { Block } from '../../types';
 import { useTranslation } from 'react-i18next';
 import { CountdownDigit } from './CountdownDigit';
+import { Clock3, SkipForward } from 'lucide-react';
 
 interface TimerPanelProps {
   currentBlock: Block | undefined;
@@ -60,9 +61,7 @@ export const TimerPanel = React.memo(function TimerPanel({
       </div>
 
       <span className="inline-flex items-center gap-1 text-base-content/30 text-xs font-medium">
-        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="block shrink-0">
-          <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
-        </svg>
+        <Clock3 size={11} className="block shrink-0" />
         {currentBlock?.duration_minutes} min
       </span>
 
@@ -80,9 +79,7 @@ export const TimerPanel = React.memo(function TimerPanel({
               className="btn btn-md btn-outline btn-ghost"
               title="Pular bloco"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="5 4 15 12 5 20 5 4" /><rect x="17" y="5" width="2" height="14" />
-              </svg>
+              <SkipForward size={16} fill="currentColor" />
             </button>
           </>
         )}

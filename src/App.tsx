@@ -4,6 +4,7 @@ import { useScheduleStore } from './store/scheduleStore';
 import { ScheduleBoard } from './components/schedule/ScheduleBoard';
 import { PracticeRoom } from './components/practice/PracticeRoom';
 import { LanguageSwitcher } from './components/common/LanguageSwitcher';
+import { XCircle, Play } from 'lucide-react';
 import './App.css';
 
 function App() {
@@ -29,9 +30,7 @@ function App() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-base-200 p-8">
         <div role="alert" className="alert alert-error max-w-lg shadow-lg">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
+          <XCircle className="h-6 w-6 shrink-0" />
           <div>
             <h3 className="font-bold">{t('errors.loadFailed')}</h3>
             <p className="text-sm">{error}</p>
@@ -66,9 +65,7 @@ function App() {
           className="btn btn-primary gap-2"
         >
           {t('app.startTodayPractice')}
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-            <polygon points="5 3 19 12 5 21 5 3" />
-          </svg>
+          <Play size={16} fill="currentColor" />
         </button>
         </div>
       </header>

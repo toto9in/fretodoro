@@ -1,6 +1,7 @@
 import React from 'react';
 import { Block } from '../../types';
 import { useTranslation } from 'react-i18next';
+import { List } from 'lucide-react';
 
 export const QueueSidebar = React.memo(({ blocks, currentBlockIndex }: {
   blocks: Block[];
@@ -11,10 +12,7 @@ export const QueueSidebar = React.memo(({ blocks, currentBlockIndex }: {
   <div className="w-64 shrink-0 bg-base-100 border border-base-300 rounded-md shadow-sm overflow-hidden flex flex-col">
     <div className="px-4 py-2.5 border-b border-base-300 bg-base-200">
       <h3 className="font-bold text-base-content text-xs flex items-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M8 6h13" /><path d="M8 12h13" /><path d="M8 18h13" />
-          <path d="M3 6h.01" /><path d="M3 12h.01" /><path d="M3 18h.01" />
-        </svg>
+        <List size={12} />
         {t('queueSidebar.title')}
       </h3>
     </div>
