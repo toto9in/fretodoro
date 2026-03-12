@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@plugin "daisyui" {
+  themes: dim --default;
+}
+
+@theme {
+  --font-sans: "Geist Mono", "Inter", ui-monospace, monospace;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
