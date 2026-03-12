@@ -27,7 +27,7 @@ The core philosophy of **Fretodoro** is to break down your large, intimidating p
   Execute your plan effectively.
 </p>
 <p align="center">
-  <img src=".github/assets/practic.png" alt="Fretodoro Practice View" width="80%">
+  <img src=".github/assets/practice.png" alt="Fretodoro Practice View" width="80%">
 </p>
 
 
