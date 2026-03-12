@@ -1,15 +1,10 @@
 # Fretodoro
 
-<p align="center">
-  <b>Weekly Study Schedule</b><br>
-  Maximize your practice sessions with structured, timed goals.
-</p>
+Fretodoro is a highly visual, drag-and-drop weekly study schedule and practice management application tailored for musicians, guitarists, and dedicated learners. It takes the proven focus-boosting principles of the Pomodoro technique and applies them to a customizable weekly planner.
 
 <p align="center">
   <img src=".github/assets/planner.png" alt="Fretodoro Weekly Planner View" width="100%">
 </p>
-
-Fretodoro is a highly visual, drag-and-drop weekly study schedule and practice management application tailored for musicians, guitarists, and dedicated learners. It takes the proven focus-boosting principles of the Pomodoro technique and applies them to a customizable weekly planner.
 
 ## Overview
 
@@ -29,7 +24,7 @@ The core philosophy of **Fretodoro** is to break down your large, intimidating p
 
 <p align="center">
   <b>Focused Practice Mode</b><br>
-  Execute your plan effectively without distractions.
+  Execute your plan effectively.
 </p>
 <p align="center">
   <img src=".github/assets/practice.png" alt="Fretodoro Practice View" width="80%">
