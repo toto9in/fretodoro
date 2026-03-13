@@ -1,22 +1,40 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useScheduleStore } from './store/scheduleStore';
 import { ScheduleBoard } from './components/schedule/ScheduleBoard';
 import { PracticeRoom } from './components/practice/PracticeRoom';
 import { LanguageSwitcher } from './components/common/LanguageSwitcher';
-import { XCircle, Play } from 'lucide-react';
+import { XCircle, Play, FileDown } from 'lucide-react';
+import { save } from '@tauri-apps/plugin-dialog';
+import { invoke } from '@tauri-apps/api/core';
 import './App.css';
 
 function App() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const loadSchedule = useScheduleStore(s => s.loadSchedule);
   const isLoading = useScheduleStore(s => s.isLoading);
   const error = useScheduleStore(s => s.error);
   const [isPracticing, setIsPracticing] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
 
   useEffect(() => {
     loadSchedule();
   }, [loadSchedule]);
+
+  const handleExport = useCallback(async () => {
+    const path = await save({
+      filters: [{ name: 'PDF', extensions: ['pdf'] }],
+      defaultPath: 'cronograma-fretodoro.pdf',
+    });
+    if (!path) return;
+
+    setIsExporting(true);
+    try {
+      await invoke('export_schedule_pdf', { path, lang: i18n.language });
+    } finally {
+      setIsExporting(false);
+    }
+  }, [i18n.language]);
 
   if (isLoading) {
     return (
@@ -61,12 +79,23 @@ function App() {
         <div className="flex gap-2 items-center">
           <LanguageSwitcher />
           <button
-          onClick={() => setIsPracticing(true)}
-          className="btn btn-primary gap-2"
-        >
-          {t('app.startTodayPractice')}
-          <Play size={16} fill="currentColor" />
-        </button>
+            onClick={handleExport}
+            disabled={isExporting}
+            className="btn btn-ghost btn-sm btn-square"
+            title="Exportar PDF"
+          >
+            {isExporting
+              ? <span className="loading loading-spinner loading-xs" />
+              : <FileDown size={16} />
+            }
+          </button>
+          <button
+            onClick={() => setIsPracticing(true)}
+            className="btn btn-primary gap-2"
+          >
+            {t('app.startTodayPractice')}
+            <Play size={16} fill="currentColor" />
+          </button>
         </div>
       </header>
 
