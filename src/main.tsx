@@ -8,9 +8,8 @@ import "@fontsource/geist-mono/800.css";
 import "@fontsource/geist-mono/900.css";
 import App from "./App";
 
-import { initI18n } from './i18n/config';
+import { initI18n } from "./i18n/config";
 
-// Initialize i18n before rendering to avoid flashes of un-translated content
 initI18n().then(() => {
   ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <React.StrictMode>

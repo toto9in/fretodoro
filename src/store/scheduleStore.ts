@@ -1,6 +1,6 @@
-import { create } from 'zustand';
-import { invoke } from '@tauri-apps/api/core';
-import { Schedule, Block, DayOfWeek } from '../types';
+import { create } from "zustand";
+import { invoke } from "@tauri-apps/api/core";
+import { Schedule, Block, DayOfWeek } from "../types";
 
 interface DeletedBlockInfo {
   block: Block;
@@ -14,31 +14,47 @@ interface ScheduleState {
   lastDeleted: DeletedBlockInfo | null;
   loadSchedule: () => Promise<void>;
   saveScheduleProxy: (newSchedule: Schedule) => Promise<void>;
-  addBlock: (day: DayOfWeek, block: Omit<Block, 'id' | 'order_index'>) => Promise<void>;
+  addBlock: (
+    day: DayOfWeek,
+    block: Omit<Block, "id" | "order_index">,
+  ) => Promise<void>;
   removeBlock: (day: DayOfWeek, blockId: string) => Promise<void>;
   undoDelete: () => Promise<void>;
   clearLastDeleted: () => void;
   updateBlockOrder: (day: DayOfWeek, blocks: Block[]) => Promise<void>;
-  moveBlock: (fromDay: DayOfWeek, toDay: DayOfWeek, blockId: string, toIndex: number) => Promise<void>;
+  moveBlock: (
+    fromDay: DayOfWeek,
+    toDay: DayOfWeek,
+    blockId: string,
+    toIndex: number,
+  ) => Promise<void>;
 }
 
 const defaultDays: DayOfWeek[] = [
-  "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
 ];
 
 function ensureCompleteSchedule(schedule: Schedule): Schedule {
-  const existingDays = schedule.routines.map(r => r.day_of_week);
+  const existingDays = schedule.routines.map((r) => r.day_of_week);
 
   const completeRoutines = [...schedule.routines];
 
-  defaultDays.forEach(day => {
+  defaultDays.forEach((day) => {
     if (!existingDays.includes(day)) {
       completeRoutines.push({ day_of_week: day, blocks: [] });
     }
   });
 
-  // Sort logically Mon -> Sun
-  completeRoutines.sort((a, b) => defaultDays.indexOf(a.day_of_week) - defaultDays.indexOf(b.day_of_week));
+  completeRoutines.sort(
+    (a, b) =>
+      defaultDays.indexOf(a.day_of_week) - defaultDays.indexOf(b.day_of_week),
+  );
 
   return { routines: completeRoutines };
 }
@@ -52,7 +68,7 @@ export const useScheduleStore = create<ScheduleState>((set, get) => ({
   loadSchedule: async () => {
     try {
       set({ isLoading: true, error: null });
-      const rawSchedule = await invoke<Schedule>('get_schedule');
+      const rawSchedule = await invoke<Schedule>("get_schedule");
 
       const fullSchedule = ensureCompleteSchedule(rawSchedule);
 
@@ -64,12 +80,11 @@ export const useScheduleStore = create<ScheduleState>((set, get) => ({
 
   saveScheduleProxy: async (newSchedule: Schedule) => {
     const previousSchedule = get().schedule;
-    // Update otimista — atualiza o state imediatamente, evitando flash de loading
+
     set({ schedule: newSchedule, error: null });
     try {
-      await invoke('save_schedule', { schedule: newSchedule });
+      await invoke("save_schedule", { schedule: newSchedule });
     } catch (err: any) {
-      // Reverte em caso de falha
       set({ schedule: previousSchedule, error: err.toString() });
     }
   },
@@ -77,20 +92,21 @@ export const useScheduleStore = create<ScheduleState>((set, get) => ({
   addBlock: async (day: DayOfWeek, blockData) => {
     const { schedule, saveScheduleProxy } = get();
 
-    // Gerar UUID simples no Frontend temporariamente. Em um app maior gerariamos no backend.
     const newBlock: Block = {
       ...blockData,
       id: crypto.randomUUID(),
-      order_index: schedule.routines.find(r => r.day_of_week === day)?.blocks.length || 0
+      order_index:
+        schedule.routines.find((r) => r.day_of_week === day)?.blocks.length ||
+        0,
     };
 
     const newSchedule = {
-      routines: schedule.routines.map(routine => {
+      routines: schedule.routines.map((routine) => {
         if (routine.day_of_week === day) {
           return { ...routine, blocks: [...routine.blocks, newBlock] };
         }
         return routine;
-      })
+      }),
     };
 
     await saveScheduleProxy(newSchedule);
@@ -99,19 +115,21 @@ export const useScheduleStore = create<ScheduleState>((set, get) => ({
   removeBlock: async (day: DayOfWeek, blockId: string) => {
     const { schedule, saveScheduleProxy } = get();
 
-    // Guarda o bloco antes de deletar para possibilitar undo
-    const routine = schedule.routines.find(r => r.day_of_week === day);
-    const deletedBlock = routine?.blocks.find(b => b.id === blockId);
+    const routine = schedule.routines.find((r) => r.day_of_week === day);
+    const deletedBlock = routine?.blocks.find((b) => b.id === blockId);
 
     const newSchedule = {
-      routines: schedule.routines.map(routine => {
+      routines: schedule.routines.map((routine) => {
         if (routine.day_of_week === day) {
-          const filteredBlocks = routine.blocks.filter(b => b.id !== blockId);
-          const reindexedBlocks = filteredBlocks.map((b, i) => ({ ...b, order_index: i }));
+          const filteredBlocks = routine.blocks.filter((b) => b.id !== blockId);
+          const reindexedBlocks = filteredBlocks.map((b, i) => ({
+            ...b,
+            order_index: i,
+          }));
           return { ...routine, blocks: reindexedBlocks };
         }
         return routine;
-      })
+      }),
     };
 
     if (deletedBlock) {
@@ -127,13 +145,16 @@ export const useScheduleStore = create<ScheduleState>((set, get) => ({
 
     const { block, day } = lastDeleted;
     const newSchedule = {
-      routines: schedule.routines.map(routine => {
+      routines: schedule.routines.map((routine) => {
         if (routine.day_of_week === day) {
-          const newBlocks = [...routine.blocks, block].map((b, i) => ({ ...b, order_index: i }));
+          const newBlocks = [...routine.blocks, block].map((b, i) => ({
+            ...b,
+            order_index: i,
+          }));
           return { ...routine, blocks: newBlocks };
         }
         return routine;
-      })
+      }),
     };
 
     set({ lastDeleted: null });
@@ -150,12 +171,12 @@ export const useScheduleStore = create<ScheduleState>((set, get) => ({
     const reindexedBlocks = newBlocks.map((b, i) => ({ ...b, order_index: i }));
 
     const newSchedule = {
-      routines: schedule.routines.map(routine => {
+      routines: schedule.routines.map((routine) => {
         if (routine.day_of_week === day) {
           return { ...routine, blocks: reindexedBlocks };
         }
         return routine;
-      })
+      }),
     };
 
     await saveScheduleProxy(newSchedule);
@@ -164,24 +185,26 @@ export const useScheduleStore = create<ScheduleState>((set, get) => ({
   moveBlock: async (fromDay, toDay, blockId, toIndex) => {
     const { schedule, saveScheduleProxy } = get();
 
-    // Encontra o bloco no dia de origem
-    const fromRoutine = schedule.routines.find(r => r.day_of_week === fromDay);
-    const block = fromRoutine?.blocks.find(b => b.id === blockId);
+    const fromRoutine = schedule.routines.find(
+      (r) => r.day_of_week === fromDay,
+    );
+    const block = fromRoutine?.blocks.find((b) => b.id === blockId);
     if (!block) return;
 
-    // Remove do dia de origem e re-indexa
-    const newRoutines = schedule.routines.map(routine => {
+    const newRoutines = schedule.routines.map((routine) => {
       if (routine.day_of_week === fromDay) {
         const filtered = routine.blocks
-          .filter(b => b.id !== blockId)
+          .filter((b) => b.id !== blockId)
           .map((b, i) => ({ ...b, order_index: i }));
         return { ...routine, blocks: filtered };
       }
       if (routine.day_of_week === toDay) {
-        // Insere na posicao correta do dia de destino
         const destBlocks = [...routine.blocks];
         const clampedIndex = Math.min(toIndex, destBlocks.length);
-        destBlocks.splice(clampedIndex, 0, { ...block, order_index: clampedIndex });
+        destBlocks.splice(clampedIndex, 0, {
+          ...block,
+          order_index: clampedIndex,
+        });
         const reindexed = destBlocks.map((b, i) => ({ ...b, order_index: i }));
         return { ...routine, blocks: reindexed };
       }
@@ -189,5 +212,5 @@ export const useScheduleStore = create<ScheduleState>((set, get) => ({
     });
 
     await saveScheduleProxy({ routines: newRoutines });
-  }
+  },
 }));

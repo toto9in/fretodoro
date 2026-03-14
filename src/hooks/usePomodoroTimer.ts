@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef } from "react";
 
 interface UsePomodoroTimerReturn {
   timeLeft: number;
@@ -11,13 +11,13 @@ interface UsePomodoroTimerReturn {
   formatTime: (seconds: number) => string;
 }
 
-export function usePomodoroTimer(initialDurationSeconds: number): UsePomodoroTimerReturn {
+export function usePomodoroTimer(
+  initialDurationSeconds: number,
+): UsePomodoroTimerReturn {
   const [timeLeft, setTimeLeft] = useState(initialDurationSeconds);
   const [isRunning, setIsRunning] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
 
-  // Ref para evitar que o effect dependa de timeLeft —
-  // sem isso, cada tick recria o interval (60 creates+clears por minuto).
   const timeLeftRef = useRef(timeLeft);
   timeLeftRef.current = timeLeft;
 
@@ -31,12 +31,12 @@ export function usePomodoroTimer(initialDurationSeconds: number): UsePomodoroTim
         setIsRunning(false);
         setIsFinished(true);
       } else {
-        setTimeLeft(prev => prev - 1);
+        setTimeLeft((prev) => prev - 1);
       }
     }, 1000);
 
     return () => clearInterval(timerId);
-  }, [isRunning]); // ← só depende de isRunning agora
+  }, [isRunning]);
 
   const startTimer = useCallback(() => {
     if (timeLeftRef.current > 0) {
@@ -64,8 +64,17 @@ export function usePomodoroTimer(initialDurationSeconds: number): UsePomodoroTim
   const formatTime = useCallback((totalSeconds: number) => {
     const min = Math.floor(totalSeconds / 60);
     const sec = totalSeconds % 60;
-    return `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+    return `${min.toString().padStart(2, "0")}:${sec.toString().padStart(2, "0")}`;
   }, []);
 
-  return { timeLeft, isRunning, isFinished, startTimer, pauseTimer, resetTimer, skipTimer, formatTime };
+  return {
+    timeLeft,
+    isRunning,
+    isFinished,
+    startTimer,
+    pauseTimer,
+    resetTimer,
+    skipTimer,
+    formatTime,
+  };
 }

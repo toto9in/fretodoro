@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, useEffect } from 'react';
+import { useState, useRef, useCallback, useEffect } from "react";
 
 interface UseMetronomeReturn {
   bpm: number;
@@ -33,7 +33,7 @@ export function useMetronome(initialBpm = 120): UseMetronomeReturn {
     gain.connect(ctx.destination);
 
     osc.frequency.setValueAtTime(880, ctx.currentTime); // A5
-    osc.type = 'sine';
+    osc.type = "sine";
 
     gain.gain.setValueAtTime(0.3, ctx.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
@@ -41,7 +41,7 @@ export function useMetronome(initialBpm = 120): UseMetronomeReturn {
     osc.start(ctx.currentTime);
     osc.stop(ctx.currentTime + 0.08);
 
-    setBeat(prev => prev + 1);
+    setBeat((prev) => prev + 1);
   }, [getAudioCtx]);
 
   const stopInterval = useCallback(() => {
@@ -51,12 +51,15 @@ export function useMetronome(initialBpm = 120): UseMetronomeReturn {
     }
   }, []);
 
-  const startInterval = useCallback((currentBpm: number) => {
-    stopInterval();
-    const ms = 60000 / currentBpm;
-    playClick(); // primeiro beat imediato
-    intervalRef.current = window.setInterval(playClick, ms);
-  }, [stopInterval, playClick]);
+  const startInterval = useCallback(
+    (currentBpm: number) => {
+      stopInterval();
+      const ms = 60000 / currentBpm;
+      playClick(); // primeiro beat imediato
+      intervalRef.current = window.setInterval(playClick, ms);
+    },
+    [stopInterval, playClick],
+  );
 
   // Reinicia interval quando BPM muda durante play
   useEffect(() => {
@@ -67,7 +70,7 @@ export function useMetronome(initialBpm = 120): UseMetronomeReturn {
   }, [bpm, isPlaying, startInterval, stopInterval]);
 
   const toggle = useCallback(() => {
-    setIsPlaying(prev => !prev);
+    setIsPlaying((prev) => !prev);
     setBeat(0);
   }, []);
 

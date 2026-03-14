@@ -1,4 +1,4 @@
-export type DayOfWeek = 
+export type DayOfWeek =
   | "Monday"
   | "Tuesday"
   | "Wednesday"
@@ -8,7 +8,7 @@ export type DayOfWeek =
   | "Sunday";
 
 export interface Block {
-  id: string; // Uuid no Rust
+  id: string;
   title: string;
   duration_minutes: number;
   order_index: number;

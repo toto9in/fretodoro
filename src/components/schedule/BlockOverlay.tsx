@@ -1,5 +1,5 @@
-import { Block } from '../../types';
-import { GripVertical, Clock3 } from 'lucide-react';
+import { Block } from "../../types";
+import { GripVertical, Clock3 } from "lucide-react";
 
 export function BlockOverlay({ block }: { block: Block }) {
   return (
@@ -10,7 +10,9 @@ export function BlockOverlay({ block }: { block: Block }) {
             <GripVertical size={14} />
           </span>
           <div className="min-w-0 flex-1">
-            <p className="text-sm font-semibold text-base-content line-clamp-2 leading-tight">{block.title}</p>
+            <p className="text-sm font-semibold text-base-content line-clamp-2 leading-tight">
+              {block.title}
+            </p>
             <span className="inline-flex items-center gap-1 mt-1.5 text-primary text-xs font-bold">
               <Clock3 size={12} className="block shrink-0" />
               {block.duration_minutes} min
