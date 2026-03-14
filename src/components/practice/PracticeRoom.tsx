@@ -1,22 +1,21 @@
-import { useEffect, useState, useRef, useCallback } from 'react';
-import { useScheduleStore } from '../../store/scheduleStore';
-import { usePomodoroTimer } from '../../hooks/usePomodoroTimer';
-import { useTranslation } from 'react-i18next';
-import { Block } from '../../types';
-import { TimerPanel } from './TimerPanel';
-import { MetronomePanel } from './MetronomePanel';
-import { QueueSidebar } from './QueueSidebar';
-import { ArrowLeft } from 'lucide-react';
+import { useEffect, useState, useRef, useCallback } from "react";
+import { useScheduleStore } from "../../store/scheduleStore";
+import { usePomodoroTimer } from "../../hooks/usePomodoroTimer";
+import { useTranslation } from "react-i18next";
+import { Block } from "../../types";
+import { TimerPanel } from "./TimerPanel";
+import { MetronomePanel } from "./MetronomePanel";
+import { QueueSidebar } from "./QueueSidebar";
+import { ArrowLeft } from "lucide-react";
+import { getTodayDayOfWeek } from "../../utils/date";
 
 interface PracticeRoomProps {
   onBack: () => void;
 }
 
-const DAYS_MAP = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] as const;
-
 export const PracticeRoom = ({ onBack }: PracticeRoomProps) => {
   const { t } = useTranslation();
-  const schedule = useScheduleStore(s => s.schedule);
+  const schedule = useScheduleStore((s) => s.schedule);
 
   const [todayBlocks, setTodayBlocks] = useState<Block[]>([]);
   const [currentBlockIndex, setCurrentBlockIndex] = useState(0);
@@ -25,18 +24,29 @@ export const PracticeRoom = ({ onBack }: PracticeRoomProps) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    const todayName = DAYS_MAP[new Date().getDay()];
-    const todayRoutine = schedule.routines.find(r => r.day_of_week === todayName);
+    const todayName = getTodayDayOfWeek();
+    const todayRoutine = schedule.routines.find(
+      (r) => r.day_of_week === todayName,
+    );
     if (todayRoutine) setTodayBlocks(todayRoutine.blocks || []);
     if (!audioRef.current) {
-      audioRef.current = new Audio('https://actions.google.com/sounds/v1/alarms/beep_short.ogg');
+      audioRef.current = new Audio(
+        "https://actions.google.com/sounds/v1/alarms/beep_short.ogg",
+      );
     }
   }, [schedule]);
 
   const currentBlock = todayBlocks[currentBlockIndex];
 
-  const { timeLeft, isRunning, isFinished, startTimer, pauseTimer, resetTimer, skipTimer } =
-    usePomodoroTimer(0);
+  const {
+    timeLeft,
+    isRunning,
+    isFinished,
+    startTimer,
+    pauseTimer,
+    resetTimer,
+    skipTimer,
+  } = usePomodoroTimer(0);
 
   useEffect(() => {
     if (currentBlock) {
@@ -58,7 +68,7 @@ export const PracticeRoom = ({ onBack }: PracticeRoomProps) => {
 
   const handleNextBlock = useCallback(() => {
     if (currentBlockIndex < todayBlocks.length - 1) {
-      setCurrentBlockIndex(prev => prev + 1);
+      setCurrentBlockIndex((prev) => prev + 1);
     } else {
       onBack();
     }
@@ -70,8 +80,12 @@ export const PracticeRoom = ({ onBack }: PracticeRoomProps) => {
       <div className="flex items-center justify-center flex-1">
         <div className="bg-base-100 border border-base-300 rounded-md shadow-sm p-10 text-center max-w-md">
           <h2 className="text-xl font-bold text-base-content mb-2">🎉</h2>
-          <p className="text-base-content/50 text-sm mb-6">{t('practiceRoom.noActivities')}</p>
-          <button onClick={onBack} className="btn btn-neutral btn-sm">{t('practiceRoom.returnHome')}</button>
+          <p className="text-base-content/50 text-sm mb-6">
+            {t("practiceRoom.noActivities")}
+          </p>
+          <button onClick={onBack} className="btn btn-neutral btn-sm">
+            {t("practiceRoom.returnHome")}
+          </button>
         </div>
       </div>
     );
@@ -81,12 +95,14 @@ export const PracticeRoom = ({ onBack }: PracticeRoomProps) => {
 
   return (
     <div className="flex flex-col max-w-5xl mx-auto w-full h-full">
-
       {/* Top Nav */}
       <div className="mb-4 flex items-center justify-between shrink-0">
-        <button onClick={onBack} className="btn btn-ghost btn-sm gap-1 text-base-content/60">
+        <button
+          onClick={onBack}
+          className="btn btn-ghost btn-sm gap-1 text-base-content/60"
+        >
           <ArrowLeft size={16} />
-          {t('practiceRoom.back')}
+          {t("practiceRoom.back")}
         </button>
         <span className="text-sm text-base-content/40 font-medium">
           Bloco {currentBlockIndex + 1} / {todayBlocks.length}
@@ -94,10 +110,8 @@ export const PracticeRoom = ({ onBack }: PracticeRoomProps) => {
       </div>
 
       <div className="flex gap-4 flex-1 min-h-0">
-
         {/* ---- Coluna principal: Timer + Metrônomo empilhados ---- */}
         <div className="flex-1 flex flex-col gap-4 overflow-y-auto min-w-0">
-
           <TimerPanel
             currentBlock={currentBlock}
             timeLeft={timeLeft}
@@ -113,12 +127,13 @@ export const PracticeRoom = ({ onBack }: PracticeRoomProps) => {
 
           {/* Metrônomo — componente isolado, re-renders de beat não propagam */}
           <MetronomePanel />
-
         </div>
 
         {/* Fila de Hoje — componente isolado, memoizado */}
-        <QueueSidebar blocks={todayBlocks} currentBlockIndex={currentBlockIndex} />
-
+        <QueueSidebar
+          blocks={todayBlocks}
+          currentBlockIndex={currentBlockIndex}
+        />
       </div>
     </div>
   );
