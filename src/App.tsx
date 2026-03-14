@@ -6,6 +6,7 @@ import { PracticeRoom } from "./components/practice/PracticeRoom";
 import { LanguageSwitcher } from "./components/common/LanguageSwitcher";
 import { ExportPdfButton } from "./components/common/ExportPdfButton";
 import { XCircle, Play } from "lucide-react";
+import appIcon from "./assets/app-icon.png";
 import "./App.css";
 
 function App() {
@@ -58,13 +59,16 @@ function App() {
   return (
     <div className="min-h-screen bg-base-200 p-6 lg:p-8 flex flex-col h-screen">
       <header className="mb-8 flex justify-between items-center shrink-0">
-        <div>
-          <h1 className="text-3xl font-bold text-base-content tracking-tight">
-            {t("app.title")}
-          </h1>
-          <p className="text-base-content/50 mt-1 font-medium text-sm">
-            {t("app.subtitle")}
-          </p>
+        <div className="flex items-center gap-3">
+          <img src={appIcon} alt="Fretodoro" className="w-16 h-16 rounded-xl" />
+          <div>
+            <h1 className="text-3xl font-bold text-base-content tracking-tight">
+              {t("app.title")}
+            </h1>
+            <p className="text-base-content/50 mt-1 font-medium text-sm">
+              {t("app.subtitle")}
+            </p>
+          </div>
         </div>
         <div className="flex gap-2 items-center">
           <LanguageSwitcher />
