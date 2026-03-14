@@ -3,12 +3,12 @@ import { changeLanguage } from "../../i18n/config";
 import { Settings } from "lucide-react";
 
 const LANGUAGES = [
-  { code: "pt-BR", label: "PT-BR" },
   { code: "en", label: "EN" },
+  { code: "pt-BR", label: "PT-BR" },
 ];
 
 export function LanguageSwitcher() {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   return (
     <div className="dropdown dropdown-end">
@@ -16,9 +16,9 @@ export function LanguageSwitcher() {
         tabIndex={0}
         role="button"
         className="btn btn-ghost btn-sm btn-square"
-        title="Language / Idioma"
+        title={t("app.language")}
       >
-        <Settings size={16} />
+        <Settings size={18} />
       </div>
       <ul
         tabIndex={-1}

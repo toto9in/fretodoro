@@ -100,7 +100,7 @@ export const TimerPanel = React.memo(function TimerPanel({
             onClick={onNext}
             className="btn btn-md btn-success w-full gap-2"
           >
-            {isLastBlock ? `🏆 ${t("practiceRoom.finishPractice")}` : "→"}
+            {isLastBlock ? `${t("practiceRoom.finishPractice")}` : "→"}
           </button>
         )}
       </div>

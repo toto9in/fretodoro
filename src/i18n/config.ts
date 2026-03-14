@@ -14,7 +14,7 @@ export const STORE_FILENAME = "settings.json";
 export const LANG_STORE_KEY = "app_language";
 
 export async function initI18n() {
-  let initialLang = "pt-BR"; // default fallback
+  let initialLang = "en";
 
   try {
     // Check if running in Tauri environment
@@ -41,9 +41,9 @@ export async function initI18n() {
   await i18n.use(initReactI18next).init({
     resources,
     lng: initialLang,
-    fallbackLng: "pt-BR",
+    fallbackLng: "en",
     interpolation: {
-      escapeValue: false, // react already safes from xss
+      escapeValue: false,
     },
   });
 

@@ -2,7 +2,9 @@
   "app": {
     "title": "Fretodoro",
     "subtitle": "Weekly Study Schedule",
-    "startTodayPractice": "Start Today's Practice"
+    "startTodayPractice": "Start Today's Practice",
+    "exportPdf": "Export PDF",
+    "language": "Language"
   },
   "errors": {
     "loadFailed": "Failed to load data",

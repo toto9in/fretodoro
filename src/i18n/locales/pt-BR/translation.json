@@ -2,7 +2,9 @@
   "app": {
     "title": "Fretodoro",
     "subtitle": "Cronograma Semanal de Estudos",
-    "startTodayPractice": "Iniciar Treino de Hoje"
+    "startTodayPractice": "Iniciar Treino de Hoje",
+    "exportPdf": "Exportar PDF",
+    "language": "Idioma"
   },
   "errors": {
     "loadFailed": "Erro ao carregar dados",

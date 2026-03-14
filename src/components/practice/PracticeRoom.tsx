@@ -74,12 +74,10 @@ export const PracticeRoom = ({ onBack }: PracticeRoomProps) => {
     }
   }, [currentBlockIndex, todayBlocks.length, onBack]);
 
-  // --- Estado: Sem treino hoje ---
   if (todayBlocks.length === 0) {
     return (
       <div className="flex items-center justify-center flex-1">
         <div className="bg-base-100 border border-base-300 rounded-md shadow-sm p-10 text-center max-w-md">
-          <h2 className="text-xl font-bold text-base-content mb-2">🎉</h2>
           <p className="text-base-content/50 text-sm mb-6">
             {t("practiceRoom.noActivities")}
           </p>
@@ -110,7 +108,6 @@ export const PracticeRoom = ({ onBack }: PracticeRoomProps) => {
       </div>
 
       <div className="flex gap-4 flex-1 min-h-0">
-        {/* ---- Coluna principal: Timer + Metrônomo empilhados ---- */}
         <div className="flex-1 flex flex-col gap-4 overflow-y-auto min-w-0">
           <TimerPanel
             currentBlock={currentBlock}
@@ -125,11 +122,9 @@ export const PracticeRoom = ({ onBack }: PracticeRoomProps) => {
             onNext={handleNextBlock}
           />
 
-          {/* Metrônomo — componente isolado, re-renders de beat não propagam */}
           <MetronomePanel />
         </div>
 
-        {/* Fila de Hoje — componente isolado, memoizado */}
         <QueueSidebar
           blocks={todayBlocks}
           currentBlockIndex={currentBlockIndex}

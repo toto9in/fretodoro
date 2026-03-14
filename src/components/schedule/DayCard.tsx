@@ -77,7 +77,7 @@ export const DayCard = React.memo(
               className="btn btn-primary btn-sm btn-square rounded-md"
               title="Adicionar Bloco"
             >
-              <Plus size={16} />
+              <Plus size={18} strokeWidth={2.75} />
             </button>
           </div>
 
