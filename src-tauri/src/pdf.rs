@@ -11,6 +11,8 @@ use typst::{Library, LibraryExt, World};
 
 use crate::schedule::{get_schedule_inner, DayOfWeek, Schedule};
 
+const ICON_BYTES: &[u8] = include_bytes!("../icons/icon.png");
+
 struct ScheduleWorld {
     library: LazyHash<Library>,
     book: LazyHash<FontBook>,
@@ -55,6 +57,9 @@ impl World for ScheduleWorld {
     }
 
     fn file(&self, id: FileId) -> FileResult<Bytes> {
+        if id.vpath().as_rootless_path() == std::path::Path::new("icon.png") {
+            return Ok(Bytes::new(ICON_BYTES));
+        }
         Err(FileError::NotFound(
             id.vpath().as_rootless_path().to_path_buf(),
         ))
@@ -143,14 +148,14 @@ fn cell(schedule: &Schedule, day: DayOfWeek) -> String {
         .iter()
         .map(|b| {
             format!(
-                "*{}* \\ _{} min_",
+                "#box(width: 0.65em, height: 0.65em, stroke: 0.6pt + luma(120), baseline: 20%) *{}* \\ _{} min_",
                 escape_typst_characters(&b.title),
                 b.duration_minutes
             )
         })
         .collect();
 
-    format!("[\n    {}\n  ]", lines.join(" \\ #v(2pt)\n    "))
+    format!("[\n    {}\n  ]", lines.join("\n    #v(4pt)\n    "))
 }
 
 fn generate_typst_source(schedule: &Schedule, lang: &str) -> String {
@@ -174,8 +179,16 @@ fn generate_typst_source(schedule: &Schedule, lang: &str) -> String {
 #set page(paper: "a4", margin: (x: 1.5cm, y: 2cm))
 #set text(size: 9pt)
 
-= {title}
-#text(size: 7.5pt, fill: luma(140))[{generated_on} {date}]
+#grid(
+  columns: (auto, 1fr),
+  align: horizon,
+  gutter: 0.4cm,
+  image("icon.png", width: 1.2cm),
+  [
+    = {title}
+    #text(size: 7.5pt, fill: luma(140))[{generated_on} {date}]
+  ],
+)
 
 #v(0.4cm)
 
@@ -208,8 +221,16 @@ fn generate_typst_source(schedule: &Schedule, lang: &str) -> String {
 #set page(paper: "a4", flipped: true, margin: (x: 1.5cm, y: 1.5cm))
 #set text(size: 10pt)
 
-= {title}
-#text(size: 7.5pt, fill: luma(140))[{date} — {landscape_view}]
+#grid(
+  columns: (auto, 1fr),
+  align: horizon,
+  gutter: 0.4cm,
+  image("icon.png", width: 1.2cm),
+  [
+    = {title}
+    #text(size: 7.5pt, fill: luma(140))[{date} — {landscape_view}]
+  ],
+)
 
 #v(0.4cm)
 
