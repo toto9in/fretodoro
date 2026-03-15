@@ -3,6 +3,7 @@ import { Block } from "../../types";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { GripVertical, Clock3, Trash2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const SortableBlockItem = React.memo(function SortableBlockItem({
   block,
@@ -13,6 +14,7 @@ export const SortableBlockItem = React.memo(function SortableBlockItem({
   onRemove: () => void;
   isActiveBlock: boolean;
 }) {
+  const { t } = useTranslation();
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: block.id });
   const style = { transform: CSS.Transform.toString(transform), transition };
@@ -50,7 +52,7 @@ export const SortableBlockItem = React.memo(function SortableBlockItem({
           onPointerDown={(e) => e.stopPropagation()}
           onClick={onRemove}
           className="text-error/40 hover:text-error opacity-0 group-hover:opacity-100 transition-opacity p-1 rounded hover:bg-error/10 cursor-pointer"
-          title="Remover"
+          title={t("dayCard.remove")}
         >
           <Trash2 size={18} />
         </button>

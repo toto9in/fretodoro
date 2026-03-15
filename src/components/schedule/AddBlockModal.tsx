@@ -37,11 +37,11 @@ export const AddBlockModal = React.forwardRef<
       e.preventDefault();
       const mins = Number(duration);
       if (!title.trim()) {
-        setError("Informe o nome do exercício.");
+        setError(t("dayCard.errorNameRequired"));
         return;
       }
       if (!duration || isNaN(mins) || mins <= 0) {
-        setError("Informe uma duração válida em minutos.");
+        setError(t("dayCard.errorDurationInvalid"));
         return;
       }
       await addBlock(day, { title: title.trim(), duration_minutes: mins });
@@ -100,7 +100,7 @@ export const AddBlockModal = React.forwardRef<
               className="btn"
               onClick={() => dialogRef.current?.close()}
             >
-              Cancelar
+              {t("dayCard.cancel")}
             </button>
             <button type="submit" className="btn btn-primary">
               {t("dayCard.newActivity")}

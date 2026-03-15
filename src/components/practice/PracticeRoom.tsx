@@ -103,7 +103,7 @@ export const PracticeRoom = ({ onBack }: PracticeRoomProps) => {
           {t("practiceRoom.back")}
         </button>
         <span className="text-sm text-base-content/40 font-medium">
-          Bloco {currentBlockIndex + 1} / {todayBlocks.length}
+          {t("practiceRoom.exerciseCounter", { current: currentBlockIndex + 1, total: todayBlocks.length })}
         </span>
       </div>
 
@@ -116,6 +116,7 @@ export const PracticeRoom = ({ onBack }: PracticeRoomProps) => {
             isRunning={isRunning}
             isFinished={isFinished}
             hasStartedContext={hasStartedContext}
+            isFirstBlock={currentBlockIndex === 0}
             isLastBlock={currentBlockIndex === todayBlocks.length - 1}
             onStartToggle={handleStartToggle}
             onSkip={skipTimer}

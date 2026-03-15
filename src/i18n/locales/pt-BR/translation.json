@@ -23,15 +23,20 @@
   "dayCard": {
     "more": "Mais",
     "startDay": "Começar o dia",
-    "newActivity": "Nova Atividade",
+    "newActivity": "Novo Exercício",
     "newActivityPlaceholder": "Digite e pressione Enter",
     "estimatedTime": "Tempo estimado",
     "min": "min",
     "rest": "Descanso",
-    "dropHere": "Solte aqui"
+    "dropHere": "Solte aqui",
+    "cancel": "Cancelar",
+    "addExercise": "Adicionar Exercício",
+    "remove": "Remover",
+    "errorNameRequired": "Informe o nome do exercício.",
+    "errorDurationInvalid": "Informe uma duração válida em minutos."
   },
   "scheduleBoard": {
-    "addActivity": "Adicionar atividade",
+    "addActivity": "Adicionar Exercício",
     "activityRemoved": "{{title}} removido de {{day}}",
     "undo": "Desfazer"
   },
@@ -42,23 +47,27 @@
     "resume": "Continuar",
     "finishPractice": "Finalizar Treino",
     "practiceFinished": "Treino Concluído!",
-    "noActivities": "Nenhuma atividade agendada para hoje.",
-    "allCompleted": "Todas as atividades de hoje foram concluídas!",
-    "returnHome": "Voltar ao Início"
+    "noActivities": "Nenhum exercício agendado para hoje.",
+    "allCompleted": "Todos os exercícios de hoje foram concluídos!",
+    "returnHome": "Voltar ao Início",
+    "exerciseCounter": "Exercício {{current}} / {{total}}"
   },
   "timerPanel": {
     "focus": "Foco",
     "break": "Pausa",
-    "finishEarly": "Terminar"
+    "finishEarly": "Terminar",
+    "currentExercise": "Exercício Atual",
+    "skipBlock": "Pular exercício",
+    "start": "Iniciar"
   },
   "metronome": {
     "title": "Metrônomo",
     "bpm": "BPM"
   },
   "queueSidebar": {
-    "title": "Fila de Atividades",
+    "title": "Fila de Exercícios",
     "completed": "Concluído",
-    "upNext": "Próximas",
+    "upNext": "Próximos",
     "min": "min"
   }
 }

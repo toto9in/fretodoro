@@ -23,15 +23,20 @@
   "dayCard": {
     "more": "More",
     "startDay": "Start day",
-    "newActivity": "New Activity",
+    "newActivity": "New Exercise",
     "newActivityPlaceholder": "Type and press Enter",
     "estimatedTime": "Estimated time",
     "min": "min",
     "rest": "Rest",
-    "dropHere": "Drop here"
+    "dropHere": "Drop here",
+    "cancel": "Cancel",
+    "addExercise": "Add Exercise",
+    "remove": "Remove",
+    "errorNameRequired": "Enter the exercise name.",
+    "errorDurationInvalid": "Enter a valid duration in minutes."
   },
   "scheduleBoard": {
-    "addActivity": "Add Activity",
+    "addActivity": "Add Exercise",
     "activityRemoved": "{{title}} removed from {{day}}",
     "undo": "Undo"
   },
@@ -42,21 +47,25 @@
     "resume": "Resume",
     "finishPractice": "Finish Practice",
     "practiceFinished": "Practice Finished!",
-    "noActivities": "No activities scheduled for today.",
-    "allCompleted": "All activities for today are completed!",
-    "returnHome": "Return Home"
+    "noActivities": "No exercises scheduled for today.",
+    "allCompleted": "All exercises for today are completed!",
+    "returnHome": "Return Home",
+    "exerciseCounter": "Exercise {{current}} / {{total}}"
   },
   "timerPanel": {
     "focus": "Focus",
     "break": "Break",
-    "finishEarly": "Finish Early"
+    "finishEarly": "Finish Early",
+    "currentExercise": "Current Exercise",
+    "skipBlock": "Skip exercise",
+    "start": "Start"
   },
   "metronome": {
     "title": "Metronome",
     "bpm": "BPM"
   },
   "queueSidebar": {
-    "title": "Activity Queue",
+    "title": "Exercise Queue",
     "completed": "Completed",
     "upNext": "Up Next",
     "min": "min"

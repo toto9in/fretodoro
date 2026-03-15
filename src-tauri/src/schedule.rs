@@ -51,7 +51,6 @@ impl Default for Schedule {
 
 fn get_schedule_path(app: &AppHandle) -> Result<PathBuf, String> {
     let mut path = app.path().app_data_dir().map_err(|e| e.to_string())?;
-    println!("{:?}", path);
     path.push("schedule.json");
     Ok(path)
 }

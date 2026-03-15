@@ -11,6 +11,7 @@ interface TimerPanelProps {
   isRunning: boolean;
   isFinished: boolean;
   hasStartedContext: boolean;
+  isFirstBlock: boolean;
   isLastBlock: boolean;
   onStartToggle: () => void;
   onSkip: () => void;
@@ -24,6 +25,7 @@ export const TimerPanel = React.memo(function TimerPanel({
   isRunning,
   isFinished,
   hasStartedContext,
+  isFirstBlock,
   isLastBlock,
   onStartToggle,
   onSkip,
@@ -41,7 +43,7 @@ export const TimerPanel = React.memo(function TimerPanel({
     <div className="bg-base-100 border border-base-300 rounded-md shadow-sm flex flex-col items-center justify-center p-6 gap-4">
       <div className="text-center">
         <p className="text-base-content/30 uppercase tracking-widest text-[10px] font-bold mb-1">
-          Exercício Atual
+          {t("timerPanel.currentExercise")}
         </p>
         <h2 className="text-lg font-bold text-base-content tracking-tight">
           {currentBlock?.title || "—"}
@@ -84,12 +86,12 @@ export const TimerPanel = React.memo(function TimerPanel({
             >
               {isRunning
                 ? `⏸ ${t("practiceRoom.pause")}`
-                : `▶ ${hasStartedContext ? t("practiceRoom.resume") : t("dayCard.startDay")}`}
+                : `▶ ${hasStartedContext ? t("practiceRoom.resume") : isFirstBlock ? t("dayCard.startDay") : t("timerPanel.start")}`}
             </button>
             <button
               onClick={onSkip}
               className="btn btn-md btn-outline btn-ghost"
-              title="Pular bloco"
+              title={t("timerPanel.skipBlock")}
             >
               <SkipForward size={16} fill="currentColor" />
             </button>

@@ -174,7 +174,7 @@ fn generate_typst_source(schedule: &Schedule, lang: &str) -> String {
 
     format!(
         r##"
-// ── Página 1: retrato A4 ──────────────────────────────────────────
+// ── Page 1: A4 portrait ──────────────────────────────────────────
 
 #set page(paper: "a4", margin: (x: 1.5cm, y: 2cm))
 #set text(size: 9pt)
@@ -216,7 +216,7 @@ fn generate_typst_source(schedule: &Schedule, lang: &str) -> String {
 
 #pagebreak()
 
-// ── Página 2: paisagem A4 (tablet) ───────────────────────────────
+// ── Page 2: A4 landscape (tablet) ───────────────────────────────
 
 #set page(paper: "a4", flipped: true, margin: (x: 1.5cm, y: 1.5cm))
 #set text(size: 10pt)

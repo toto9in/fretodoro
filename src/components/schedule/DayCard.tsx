@@ -75,7 +75,7 @@ export const DayCard = React.memo(
             <button
               onClick={() => modalRef.current?.open()}
               className="btn btn-primary btn-sm btn-square rounded-md"
-              title="Adicionar Bloco"
+              title={t("dayCard.addExercise")}
             >
               <Plus size={18} strokeWidth={2.75} />
             </button>
