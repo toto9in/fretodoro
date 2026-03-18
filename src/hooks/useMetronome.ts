@@ -53,7 +53,7 @@ export function useMetronome(initialBpm = 120): UseMetronomeReturn {
   const [isPlaying, setIsPlaying] = useState(false);
   const [beat, setBeat] = useState(-1);
   const [subBeat, setSubBeat] = useState(-1);
-  const [volume, setVolumeState] = useState(0.5);
+  const [volume, setVolumeState] = useState(1);
   const [timeSigIndex, setTimeSigIndexState] = useState(2); // 4/4
   const [subdivIndex, setSubdivIndexState] = useState(0); // Quarter
 
@@ -64,7 +64,7 @@ export function useMetronome(initialBpm = 120): UseMetronomeReturn {
   const currentBeatRef = useRef(0);
   const currentSubBeatRef = useRef(0);
   const bpmRef = useRef(initialBpm);
-  const volumeRef = useRef(0.5);
+  const volumeRef = useRef(1);
   const isRunningRef = useRef(false);
   const timeSigRef = useRef(TIME_SIGNATURES[2]);
   const subdivRef = useRef(SUBDIVISIONS[0]);
