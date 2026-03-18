@@ -62,7 +62,11 @@
   },
   "metronome": {
     "title": "Metronome",
-    "bpm": "BPM"
+    "bpm": "BPM",
+    "volume": "Volume",
+    "timeSig": "Time Sig.",
+    "subdivision": "Subdivision",
+    "tap": "Tap Tempo"
   },
   "queueSidebar": {
     "title": "Exercise Queue",

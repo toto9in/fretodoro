@@ -62,7 +62,11 @@
   },
   "metronome": {
     "title": "Metrônomo",
-    "bpm": "BPM"
+    "bpm": "BPM",
+    "volume": "Volume",
+    "timeSig": "Compasso",
+    "subdivision": "Subdivisão",
+    "tap": "Tap Tempo"
   },
   "queueSidebar": {
     "title": "Fila de Exercícios",
